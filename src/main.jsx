@@ -1,13 +1,13 @@
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
+import "./index.css";
 import Login from "./login/login.jsx";
-import Signup from "./signup/signup.jsx";
 import Navigation from "./navbar/navbar.jsx";
+import Signup from "./signup/signup.jsx";
 
 const router = createBrowserRouter([
   {

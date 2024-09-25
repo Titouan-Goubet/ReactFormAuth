@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import BackgroundImage from "../assets/background.jpg";
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import BackgroundImage from "../assets/background.jpg";
 import "./login.css";
 
-export default function login() {
+export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [serverErrorMessage, setServerErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -35,9 +36,12 @@ export default function login() {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Connexion réussie :", result);
+        setServerErrorMessage("");
+        setSuccessMessage(result.message || "Connexion réussie");
       } else {
-        setServerErrorMessage(result.message || "Erreur lors de la connexion.");
+        setServerErrorMessage(
+          result.message || "Email ou mot de passe incorect"
+        );
       }
     } catch (error) {
       console.error("Erreur réseau :", error);
@@ -102,11 +106,12 @@ export default function login() {
             <p className="text-danger">{errors.password.message}</p>
           )}
         </Form.Group>
+        {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
         {serverErrorMessage && (
           <p className="text-danger text-center">{serverErrorMessage}</p>
         )}
         <Button
-          className="w-100"
+          className="w-100 mt-4"
           variant="primary"
           type="submit"
           disabled={isLoading}

@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import BackgroundImage from "../assets/background.jpg";
-import { Form, Button } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import BackgroundImage from "../assets/background.jpg";
 import "./signup.css";
 
-export default function signup() {
+export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [serverErrorMessage, setServerErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const { register, handleSubmit, formState } = useForm({
     defaultValues: {
@@ -35,9 +36,12 @@ export default function signup() {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Inscription réussie :", result);
+        setServerErrorMessage("");
+        setSuccessMessage(result.message || "Inscription réussie");
       } else {
-        setServerErrorMessage(result.message || "Erreur lors de la connexion.");
+        setServerErrorMessage(
+          result.message || "Erreur lors de l'inscription."
+        );
       }
     } catch (error) {
       console.error("Erreur réseau :", error);
@@ -98,6 +102,7 @@ export default function signup() {
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
+          {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
           {errors.password && (
             <p className="text-danger">{errors.password.message}</p>
           )}
@@ -106,7 +111,7 @@ export default function signup() {
           <p className="text-danger">{errors.password.message}</p>
         )}
         <Button
-          className="w-100"
+          className="w-100 mt-4"
           variant="primary"
           type="submit"
           disabled={isLoading}
