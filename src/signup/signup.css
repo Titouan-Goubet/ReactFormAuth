@@ -1,0 +1,55 @@
+.sign-up__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.sign-up__backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.sign-up__wrapper form {
+  width: 24rem;
+  max-width: 90%;
+  z-index: 1;
+  animation: showSignInForm 1s;
+}
+
+.sign-up__wrapper form img {
+  width: 4rem;
+}
+
+.password-container {
+  position: relative;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 40px;
+}
+
+.input-with-icon i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.input-with-icon i:hover {
+  color: #333;
+}
