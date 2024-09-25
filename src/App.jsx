@@ -1,9 +1,13 @@
 import "./App.css";
+import BackgroundImage from "./assets/background.jpg";
 
 function App() {
   return (
     <>
-      <h1>Welcome Page</h1>
+      <div
+        className="sign-up__wrapper"
+        style={{ backgroundImage: `url(${BackgroundImage})` }}
+      ></div>
     </>
   );
 }
